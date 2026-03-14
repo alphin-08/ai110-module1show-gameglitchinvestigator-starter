@@ -1,4 +1,4 @@
-from logic_utils import check_guess, get_range_for_difficulty
+from logic_utils import check_guess, get_range_for_difficulty, parse_guess
 
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
@@ -28,6 +28,29 @@ def test_too_low_message_says_go_higher():
     outcome, message = check_guess(40, 50)
     assert outcome == "Too Low"
     assert "HIGHER" in message
+
+
+# Edge Case 1: Negative number guess
+def test_negative_guess_returns_too_low():
+    # Guessing a negative number when secret is 50 should return Too Low, not crash
+    outcome, message = check_guess(-5, 50)
+    assert outcome == "Too Low"
+    assert "HIGHER" in message
+
+# Edge Case 2: Decimal input gets parsed to an int
+def test_decimal_input_parses_to_int():
+    # "3.7" should parse successfully and round down to 3
+    ok, value, error = parse_guess("3.7")
+    assert ok == True
+    assert value == 3
+    assert error is None
+
+# Edge Case 3: Extremely large number guess
+def test_very_large_guess_returns_too_high():
+    # Guessing 999999 when secret is 50 should return Too High, not crash
+    outcome, message = check_guess(999999, 50)
+    assert outcome == "Too High"
+    assert "LOWER" in message
 
 
 # Bug 2: Easy mode gave fewer attempts than Normal mode

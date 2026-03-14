@@ -51,9 +51,9 @@ It wrote the code, ran away, and now the game is unplayable.
   9. Moved all four logic functions out of `app.py` and into `logic_utils.py` to separate game logic from the UI.
 
 ## 📸 Demo
-
-- [x] ![demo screenshot](image.png)
+![demo screenshot](image.png)
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+### Challenge 1: Advanced Edge-Case Testing
+![pytest results](image-1.png)
